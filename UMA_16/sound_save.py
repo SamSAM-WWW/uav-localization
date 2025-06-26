@@ -1,3 +1,5 @@
+#sound save to one file
+
 import sounddevice as sd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -47,7 +49,7 @@ print(np.min(data), np.max(data), np.mean(data))
 print(f"Saved audio file: {filepath}")
 
 
-import matplotlib.pyplot as plt
-plt.plot(data[:1000, 0])  # 第1个通道前1000个点
-plt.show()
+# import matplotlib.pyplot as plt
+# plt.plot(data[:1000, 0])  # 第1个通道前1000个点
+# plt.show()
 
