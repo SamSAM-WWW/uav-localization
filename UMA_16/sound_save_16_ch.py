@@ -28,32 +28,32 @@ data = sd.rec(int(fs * duration), samplerate=fs, channels=channels,
 sd.wait()
 print("Done recording.")
 
-# Create folder for output
-output_dir = "recorded_audio"
-os.makedirs(output_dir, exist_ok=True)
-
-timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
-# Set gain and clip
+# Gain and clip
 gain = 5.0
 data = np.clip(data * gain, -1.0, 1.0)
 
-# Save each channel separately
+# Create timestamped subfolder inside "recorded_audio"
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+base_output_dir = "recorded_audio"
+session_dir = os.path.join(base_output_dir, timestamp)
+os.makedirs(session_dir, exist_ok=True)
+
+# Save each channel separately into subfolder
 for ch in range(channels):
     ch_data = data[:, ch]
     wav_data = np.int16(ch_data * 32767)
-    filename = f"ch{ch}_{timestamp}.wav"
-    filepath = os.path.join(output_dir, filename)
+    filename = f"ch{ch}.wav"
+    filepath = os.path.join(session_dir, filename)
     wavwrite(filepath, fs, wav_data)
     print(f"Saved: {filepath}")
 
-# Optional: plot first 1000 samples of all channels
+# Optional plot
 plt.figure(figsize=(12, 10))
 for ch in range(channels):
     plt.plot(data[:1000, ch], label=f'ch {ch}')
-plt.title("First 1000 samples of each channel")
+plt.title(f"First 1000 samples - Recording {timestamp}")
 plt.xlabel("Sample Index")
 plt.ylabel("Amplitude")
-plt.legend()
+plt.legend(loc='upper right', fontsize=8)
 plt.tight_layout()
 plt.show()
