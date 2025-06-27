@@ -7,6 +7,6 @@ Sound problem may occur with VMware, please avoid using Ubuntu on VMware to reco
 
 The folder `Acoustic_Camera` is code to track sound source.
 
-The folder `Sim_ROS2` is code to simulate environment and sound source in ROS2 for further development.
+The folder `Sim_ROS2` is code to simulate environment and sound source in gazebo & ROS2 for further development.
 
 These 3 folders are separate.
