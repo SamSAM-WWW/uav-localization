@@ -8,6 +8,8 @@ This is hardware testing and audio recording by using UMA_16.
 
 📣Sound problem may occur with VMware, please avoid using Ubuntu on VMware to record sound.
 
+📣Sometimes the UMA_16 will be automatically set as system input or output. This will lead to sound record failure. You better set your other devices as system input and output before recording sound.
+
 
 ## 📁The folder `Acoustic_Camera` 
 This is code to track sound source.
