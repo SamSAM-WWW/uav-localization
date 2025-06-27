@@ -1,1 +1,11 @@
 uma16_venv/
+.DS_Store
+.idea/
+.venv/
+*.wav
+recorder_output/
+stop
+*.avi
+__pycache__/
+*.json
+flag_*
