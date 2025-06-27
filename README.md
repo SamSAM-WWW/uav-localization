@@ -19,3 +19,5 @@ This is code to simulate environment and sound source in gazebo & ROS2 for furth
 
 
 These 3 folders are separate.
+
+minidsp_uma-16.xml is the layout location of the microphones on the miniDSP UMA-16
