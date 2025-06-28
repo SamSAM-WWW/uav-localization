@@ -2,7 +2,7 @@ uma16_venv/
 .DS_Store
 .idea/
 .venv/
-*.wav
+# *.wav
 recorder_output/
 stop
 *.avi
