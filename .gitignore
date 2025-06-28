@@ -10,3 +10,4 @@ __pycache__/
 *.json
 flag_*
 # recorded_audio/
+.ipynb_checkpoints/
