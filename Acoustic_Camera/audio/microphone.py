@@ -7,6 +7,8 @@ from common.consts import RECORDS_PATH, WAV_FILE_NAME
 from common.log import debug
 from common.process_sync import should_stop
 
+import sounddevice as sd
+
 FRAME_RATE = 16000
 
 SAMPLE_FORMAT = pyaudio.paInt16
@@ -16,36 +18,23 @@ class MicArray:
     def __init__(self, output_path=None, rate=FRAME_RATE, chunk_size=None):
         self.pyaudio_instance = None
         self.stream = None
-        self.channels = None
+        self.channels = 16
         self.sample_rate = rate
-        self.chunk_size = chunk_size if chunk_size else None
+        self.chunk_size = chunk_size if chunk_size else 1024
         os.makedirs(RECORDS_PATH, exist_ok=True)
         self._output_path = output_path if output_path else os.path.join(RECORDS_PATH, WAV_FILE_NAME)
         self.frames = []
 
     def _select_mic_device_index(self):
-        max_channels = 0
-        max_channels_device_index = None
-        for i in range(self.pyaudio_instance.get_device_count()):
-            dev = self.pyaudio_instance.get_device_info_by_index(i)
-            name = dev['name'].encode('utf-8')
-            input_channels = dev['maxInputChannels']
-            debug(
-                'Listing audio device',
-                index=i,
-                name=name,
-                in_channels=input_channels
-            )
-            if input_channels > max_channels:
-                max_channels = input_channels
-                max_channels_device_index = i
-        if max_channels_device_index is None:
-            raise Exception('can not find input device')
-        self.channels = max_channels
-        self.chunk_size = self.chunk_size if self.chunk_size else self.sample_rate // self.channels
-        debug('Audio device', channels=max_channels)
-        return max_channels_device_index
-
+        channels = 16
+        name_keyword = "UMA16"
+        devices = sd.query_devices()
+        for i, dev in enumerate(devices):
+            if name_keyword.lower() in dev['name'].lower() and dev['max_input_channels'] >= channels:
+                print(f"Found matching device at index {i}: {dev['name']}")
+                return i
+        raise RuntimeError(f"No input device found with keyword '{name_keyword}'")
+    
     def run(self):
         self.frames = []
         self.pyaudio_instance = pyaudio.PyAudio()
@@ -59,7 +48,7 @@ class MicArray:
             input_device_index=device_index,
         )
 
-        debug('Recording audio')
+        debug('Recording audio, press Ctrl+C to stop recording')
 
         frames = []  # Initialize array to store frames
 
