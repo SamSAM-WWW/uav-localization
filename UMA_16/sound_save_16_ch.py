@@ -20,7 +20,7 @@ def find_input_device(name_keyword):
 if __name__ == '__main__':
     fs = 48000
     channels = 16
-    duration = 5.0  # seconds
+    duration = 10.0  # seconds
     target_name = "UMA16"
 
     device_index = find_input_device(target_name)

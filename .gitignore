@@ -9,3 +9,4 @@ stop
 __pycache__/
 *.json
 flag_*
+# recorded_audio/
