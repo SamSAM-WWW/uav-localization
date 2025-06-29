@@ -2,9 +2,9 @@ import numpy as np
 import acoular
 import csv
 
-h5_file = '/home/jetson/mycode/uav-localization/Acoustic_Camera/recorder_output/records/audio.h5'
-micgeom_file = '/home/jetson/mycode/uav-localization/Acoustic_Camera/minidsp_uma-16.xml'
-output_csv = '/home/jetson/mycode/uav-localization/beamforming_result.csv'
+h5_file = 'Acoustic_Camera\\recorder_output\\records\\audio.h5'
+micgeom_file = 'Acoustic_Camera\\minidsp_uma-16.xml'
+output_csv = 'Acoustic_Camera\\beamforming_result_win.csv'
 
 block_size = 1024
 hop_size = 512
