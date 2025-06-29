@@ -2,12 +2,13 @@ uma16_venv/
 .DS_Store
 .idea/
 .venv/
-*.wav
-recorder_output/
+# *.wav
+# recorder_output/
 stop
 *.avi
 __pycache__/
 *.json
 flag_*
-*.h5
+# *.h5
 .ipynb_checkpoints/
+cache/
