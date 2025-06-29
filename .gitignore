@@ -9,5 +9,5 @@ stop
 __pycache__/
 *.json
 flag_*
-
+*.h5
 .ipynb_checkpoints/

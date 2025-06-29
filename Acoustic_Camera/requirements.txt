@@ -4,3 +4,4 @@ opencv-python==4.5.1.48
 PyAudio==0.2.11
 pyzmq==22.0.3
 tqdm==4.59.0
+traits==6.3.2

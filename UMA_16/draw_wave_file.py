@@ -2,6 +2,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
+import math
 
 # read .wav file
 file_path = "/home/jetson/mycode/uav-localization/Acoustic_Camera/recorder_output/records/audio.wav"
@@ -26,14 +27,17 @@ if data.ndim == 1:
 else:
     print("multi ch")
     channels = data.shape[1]
-    plt.figure(figsize=(12, channels * 2))
+    cols = 4
+    rows = math.ceil(channels / cols)
+    plt.figure(figsize=(16, rows * 3))  
     for i in range(channels):
-        plt.subplot(channels, 1, i + 1)
-        plt.plot(time_axis, data[:, i])
-        plt.title(f"Channel {i}")
-        plt.xlabel("Time [s]")
-        plt.ylabel("Amplitude")
+        plt.subplot(rows, cols, i + 1)
+        plt.plot(time_axis, data[:, i], label=f'Channel {i}')
+        plt.xlabel('Time [s]')
+        plt.ylabel('Amp')
         plt.grid(True)
+        plt.legend(loc='upper right')
+
 
 plt.tight_layout()
 plt.suptitle("Waveform of .wav File", fontsize=16, y=1.02)
