@@ -22,7 +22,7 @@ def next_power_of_two(x):
     """Return the next power of two greater than or equal to x."""
     return 1 << (x - 1).bit_length()
 
-def recommend_params(fs, target_fps, nperseg_list=None):
+def recommend_params(fs=16000, target_fps=30, nperseg_list=None):
     """
     Recommend nperseg, noverlap and nfft parameter combinations based on target frame rate.
     By default, tries several common nperseg values.
@@ -50,6 +50,6 @@ def recommend_params(fs, target_fps, nperseg_list=None):
 
 if __name__ == "__main__":
     fs = 16000       # sampling rate
-    target_fps = 30  # target frame rate
+    target_fps = 10  # target frame rate
 
     recommend_params(fs, target_fps)
