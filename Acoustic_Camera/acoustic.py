@@ -8,9 +8,9 @@ from pylab import figure, plot, axis, imshow, colorbar, show
 import wave
 import os
 
-wave_file = '/home/jetson/mycode/uav-localization/Acoustic_Camera/recorder_output/records/audio.wav'
-h5_file ='/home/jetson/mycode/uav-localization/Acoustic_Camera/recorder_output/records/audio.h5'
-micgeofile = '/home/jetson/mycode/uav-localization/Acoustic_Camera/minidsp_uma-16.xml'
+wave_file = 'Acoustic_Camera\\recorder_output\\records\\audio.wav'
+h5_file ='Acoustic_Camera\\recorder_output\\records\\audio.h5'
+micgeofile = 'Acoustic_Camera\\minidsp_uma-16.xml'
 
 # wav file info
 with wave.open(wave_file, 'rb') as wf:
@@ -21,22 +21,23 @@ with wave.open(wave_file, 'rb') as wf:
 
 
 if os.path.exists(h5_file):
-    os.remove(h5_file)
+    # os.remove(h5_file)
+    print("file already exists")
+else:
+    ### convert wav to h5
+    from scipy.io import wavfile
+    import tables
 
-### convert wav to h5
-from scipy.io import wavfile
-import tables
+    #read data from wav
+    fs, data = wavfile.read(wave_file)
 
-#read data from wav
-fs, data = wavfile.read(wave_file)
-
-#save_to acoular h5 format
-acoularh5 = tables.open_file(h5_file, mode = "w", title = "audio")
-acoularh5.create_earray('/','time_data', atom=None, title='', filters=None, \
-                         expectedrows=100000, chunkshape=[256,64], \
-                         byteorder=None, createparents=False, obj=data)
-acoularh5.set_node_attr('/time_data','sample_freq', fs)
-acoularh5.close()
+    #save_to acoular h5 format
+    acoularh5 = tables.open_file(h5_file, mode = "w", title = "audio")
+    acoularh5.create_earray('/','time_data', atom=None, title='', filters=None, \
+                            expectedrows=100000, chunkshape=[256,64], \
+                            byteorder=None, createparents=False, obj=data)
+    acoularh5.set_node_attr('/time_data','sample_freq', fs)
+    acoularh5.close()
 
 
 
