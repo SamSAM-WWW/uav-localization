@@ -9,7 +9,7 @@ from datetime import datetime
 
 fs = 48000
 channels = 16
-duration = 5.0  # seconds
+duration = 10  # seconds
 target_name = "UMA16"
 
 # Search for input device
@@ -48,8 +48,4 @@ wavwrite(filepath, fs, wav_data)
 print(np.min(data), np.max(data), np.mean(data))
 print(f"Saved audio file: {filepath}")
 
-
-# import matplotlib.pyplot as plt
-# plt.plot(data[:1000, 0])  # 第1个通道前1000个点
-# plt.show()
 

@@ -2,7 +2,7 @@ import numpy as np
 import acoular
 import csv
 
-h5_file = 'Acoustic_Camera\\recorder_output\\records\\audio.h5'
+h5_file = 'recorded_audio\\drone.h5'
 micgeom_file = 'Acoustic_Camera\\minidsp_uma-16.xml'
 output_csv = 'Acoustic_Camera\\beamforming_result_win.csv'
 
@@ -30,6 +30,7 @@ with open(output_csv, mode='w', newline='') as csvfile:
         # Power spectrum for current frame
         ps = acoular.PowerSpectra(time_data=mts, block_size=block_size, window='Hanning')
 
+        ## increment-accuracy
         rg = acoular.RectGrid(x_min=-0.2, x_max=0.2,
                               y_min=-0.2, y_max=0.2,
                               z=0.3,
